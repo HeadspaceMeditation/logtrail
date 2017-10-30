@@ -20,7 +20,7 @@ module.exports = function (kibana) {
           };
         }
       }
-    },    
+    },
     init: function (server, options) {
       // Add server routes and initalize the plugin here
       serverRoute(server);
