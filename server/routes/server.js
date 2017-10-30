@@ -12,7 +12,7 @@ function getMessageTemplate(handlebar, selected_config) {
         var context = {
           name : match[0],
           name_no_braces : match[2]
-        };        
+        };
         var with_click = ng_click_template(context);
         message_template = message_template.replace(match[0], with_click);
       }
@@ -52,11 +52,12 @@ function convertToClientFormat(selected_config, esResponse) {
       source[selected_config.fields.mapping['message']] = hits[i].highlight[selected_config.fields.mapping['message']][0];
     }
     var message = source[selected_config.fields.mapping['message']];
+    var ansiHTML = require('ansi-html');
     //If the user has specified a custom format for message field
     if (message_format) {
-      event['message'] = template(source);
+      event['message'] = ansiHTML(template(source));
     } else {
-      event['message'] = escape(message);
+      event['message'] = ansiHTML(escape(message));
     }
     //console.log(event.message);
     clientResponse.push(event);
